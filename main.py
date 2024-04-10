@@ -5,6 +5,7 @@ from multiprocessing import Pool
 def square(number):
     return number ** 2
 
+
 def compute_squares(numbers):
     pool = multiprocessing.Pool()
     results = pool.map(square, numbers)
