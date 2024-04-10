@@ -1,21 +1,18 @@
-from multiprocessing import Process
 import multiprocessing
 
 
-def square_number(number):
+def square(number):
     return number ** 2
 
 
 def compute_squares(numbers):
-    squared_numbers = []
-    for number in numbers:
-        p = multiprocessing.Process(target=square_number, args=(number,))
-        p.start()
-        squared_numbers.append(square_number(number))
-        p.join()
-    return squared_numbers
+    pool = multiprocessing.Pool()
+    results = pool.map(square, numbers)
+    pool.close()
+    pool.join()
+    print(results)
 
 
 if __name__ == '__main__':
-    numbers = [1, 2, 3]
-    print(compute_squares(numbers))
+    numbers = [1, 3, 5]
+    compute_squares(numbers)
